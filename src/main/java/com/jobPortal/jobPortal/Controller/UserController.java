@@ -1,4 +1,5 @@
 package com.jobPortal.jobPortal.Controller;
+import com.jobPortal.jobPortal.Model.User;
 import com.jobPortal.jobPortal.Model.UserProfile;
 import com.jobPortal.jobPortal.Services.Interface.JobService;
 import com.jobPortal.jobPortal.Services.Interface.UserService;
@@ -15,9 +16,41 @@ public class UserController {
     @Autowired
     JobService jobService;
 
-    @GetMapping("/jobList")
-    public String jobList(Model model) {
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "dashboard";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("role","user");
+        return "login";
+    }
+    @PostMapping("/login")
+    public String authenticate(@ModelAttribute User user){
+        if(!userService.isValid(user)){
+            return "login";
+        }
+        return "redirect:/user/jobList/"+user.getEmail();
+    }
+    @GetMapping("/sign-up")
+    public String signUp(Model model){
+        model.addAttribute("role","user");
+        return "signUp";
+    }
+    @PostMapping("/sign-up")
+    public String addUser(@ModelAttribute User user){
+        if(userService.isValid(user)){
+            return "signUp";
+        }
+        userService.addUser(user);
+        return "redirect:/user/login";
+    }
+
+    @GetMapping("/jobList/{email}")
+    public String jobList(Model model, @PathVariable("email") String email) {
         model.addAttribute("jobs", jobService.getJobs());
+        model.addAttribute("email", email);
         return "jobListUser";
     }
     @GetMapping("/updateProfile/{email}")

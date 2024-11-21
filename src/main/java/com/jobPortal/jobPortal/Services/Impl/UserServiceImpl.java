@@ -20,4 +20,14 @@ public class UserServiceImpl implements UserService {
         }
         return u.getUserProfile();
     }
+
+    @Override
+    public boolean isValid(User user) {
+        return userRepository.findById(user.getEmail()).orElse(null) != null;
+    }
+
+    @Override
+    public void addUser(User user) {
+        userRepository.save(user);
+    }
 }
