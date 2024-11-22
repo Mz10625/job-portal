@@ -44,8 +44,8 @@ public class AdminController {
     }
 
     @GetMapping("/jobList/{email}")
-    public String jobList(Model model, @PathVariable String email) {
-        model.addAttribute("jobs", jobService.getJobs());
+    public String jobList(Model model, @PathVariable("email") String email) {
+        model.addAttribute("jobs", jobService.getJobs(email));
         model.addAttribute("email", email);
         return "jobListAdmin";
     }

@@ -91,7 +91,7 @@
                 <td th:text="${job.company}"></td>
                 <td th:text="${job.location}"></td>
                 <td>
-                    <a th:href="@{/user/job/{id}(id=${job.id})}">View Details</a> |
+<!--                    <a th:href="@{/job/view-details/{id}(id=${job.id})}">View Details</a> |-->
                     <a th:href="@{/job/update-job/{email}/{id}(email=${email}, id=${job.id})}" class="update-btn">Update</a>
                 </td>
             </tr>

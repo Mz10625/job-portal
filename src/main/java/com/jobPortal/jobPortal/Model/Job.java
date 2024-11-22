@@ -21,5 +21,6 @@ public class Job {
     private String location;
     private String company;
     private String type;
+    private int salary;
 }
 

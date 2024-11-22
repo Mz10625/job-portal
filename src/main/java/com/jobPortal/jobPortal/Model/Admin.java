@@ -15,6 +15,6 @@ public class Admin {
     @Id
     private String email;
     private String password;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Job> jobs;
 }

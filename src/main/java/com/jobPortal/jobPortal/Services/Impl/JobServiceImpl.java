@@ -17,28 +17,35 @@ public class JobServiceImpl implements JobService {
     @Autowired
     AdminRepository adminRepository;
 
-    public List<Job> getJobs() {
+    @Override
+    public List<Job> getJobs(String email) {
+        return adminRepository.findById(email).get().getJobs();
+    }
+
+    public List<Job> getAllJobs() {
         return jobRepository.findAll();
     }
 
     @Override
     public void addJob(Job job, String email) {
-        jobRepository.save(job);
+        boolean found = false;
         Admin admin = adminRepository.getById(email);
-        admin.getJobs().add(job);
-        adminRepository.save(admin);
-
+        for(Job j : admin.getJobs()) {
+            if (j.getId() == job.getId()) {
+                found = true;
+                break;
+            }
+        }
+        Job savedJob = jobRepository.save(job);
+        if(!found){
+            admin.getJobs().add(savedJob);
+            adminRepository.save(admin);
+        }
     }
 
     @Override
-    public Job getJobById(String email, long id) {
-        Admin admin = adminRepository.findById(email).orElse(null);
-        List<Job> jobs = admin.getJobs();
-        for(Job job : jobs) {
-            if (job.getId() == id) {
-                return job;
-            }
-        }
-        return null;
+    public Job getJobById( long id) {
+        return jobRepository.findById(id).orElse(null);
     }
+
 }

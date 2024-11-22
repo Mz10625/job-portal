@@ -118,27 +118,29 @@
 
         <form th:action="@{/job/add-job/{email}(email=${email})}" method="post" th:object="${job}">
 
+
             <label for="title"><strong>Job Title:</strong></label>
-            <input type="text" id="title" name="title" th:value="${title}" placeholder="Enter job title" required/>
+            <input type="text" id="title" name="title" th:value="${job.title}" placeholder="Enter job title" required/>
+            <input type="hidden" id="id" name="id" th:value="${job.id}" />
 
             <label for="company"><strong>Company:</strong></label>
-            <input type="text" id="company" name="company" th:value="${company}" placeholder="Enter company name" required/>
+            <input type="text" id="company" name="company" th:value="${job.company}" placeholder="Enter company name" required/>
 
             <label for="location"><strong>Location:</strong></label>
-            <input type="text" id="location" name="location" th:value="${location}" placeholder="Enter job location" required/>
+            <input type="text" id="location" name="location" th:value="${job.location}" placeholder="Enter job location" required/>
 
             <label for="description"><strong>Description:</strong></label>
-            <textarea id="description" name="description" th:value="${description}" placeholder="Enter job description" required></textarea>
+            <input id="description" name="description" th:value="${job.description}" placeholder="Enter job description" required/>
 
             <label for="salary"><strong>Salary:</strong></label>
-            <input type="number" id="salary" name="salary" th:value="${salary}" placeholder="Enter salary" required/>
+            <input type="number" id="salary" name="salary" th:value="${job.salary}" placeholder="Enter salary" required/>
 
             <button type="submit">Update Job</button>
 
         </form>
 
         <div class="back-link">
-            <a href="/jobs">Back to Job Listings</a>
+            <a th:href="@{/admin/jobList/{email}(email=${email})}">Back to Job Listings</a>
         </div>
     </div>
 </div>

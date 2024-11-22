@@ -5,7 +5,8 @@ import com.jobPortal.jobPortal.Model.Job;
 import java.util.List;
 
 public interface JobService {
-    public List<Job> getJobs();
+    public List<Job> getJobs(String email);
+    public List<Job> getAllJobs();
     public void addJob(Job job, String email);
-    public Job getJobById(String email, long id);
+    public Job getJobById(long id);
 }
