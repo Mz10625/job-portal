@@ -25,7 +25,7 @@ public class AdminController {
     @PostMapping("/login")
     public String authenticate(@ModelAttribute Admin admin){
         if(!adminService.isValid(admin)){
-            return "login";
+            return "redirect:/admin/login";
         }
         return "redirect:/admin/jobList/"+admin.getEmail();
     }

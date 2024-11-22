@@ -29,9 +29,9 @@ public class UserController {
     @PostMapping("/login")
     public String authenticate(@ModelAttribute User user){
         if(!userService.isValid(user)){
-            return "login";
+            return "redirect:/user/login";
         }
-        return "redirect:/user/jobList/"+user.getEmail();
+        return "redirect:/job/jobList/"+user.getEmail();
     }
     @GetMapping("/sign-up")
     public String signUp(Model model){

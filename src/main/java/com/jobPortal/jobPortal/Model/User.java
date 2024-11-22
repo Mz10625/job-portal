@@ -13,11 +13,7 @@ import java.util.List;
 @Entity(name = "users")
 public class User {
     @Id
-    @Column(name = "email")
     private String email;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "password")
     private String password;
     @OneToMany
     List<Job> applications;

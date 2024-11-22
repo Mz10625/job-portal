@@ -14,7 +14,6 @@ import java.util.List;
 public class Admin {
     @Id
     private String email;
-    private String username;
     private String password;
     @OneToMany
     List<Job> jobs;
